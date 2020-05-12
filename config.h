@@ -5,7 +5,7 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "Liberation Mono:pixelsize=12:antialias=true:autohint=true";
+static char *font = "Fira Code:pixelsize=13:antialias=true:autohint=true";
 static int borderpx = 2;
 
 /*
@@ -172,14 +172,16 @@ const unsigned int mousescrollincrement = 1;
 static MouseShortcut mshortcuts[] = {
 	/* mask                 button   function        argument       release */
 	{ XK_ANY_MOD,           Button2, selpaste,       {.i = 0},      1 },
-	{ XK_NO_MOD,           Button4, ttysend,        {.s = "\031"} },
-	{ XK_NO_MOD,           Button5, ttysend,        {.s = "\005"} },
+	// { XK_NO_MOD,           Button4, ttysend,        {.s = "\031"} },
+	// { XK_NO_MOD,           Button5, ttysend,        {.s = "\005"} },
+	{ XK_NO_MOD,           Button4, kscrollup,      {.i = -1} },
+	{ XK_NO_MOD,           Button5, kscrolldown,    {.i = -1} },
 };
 
 MouseKey mkeys[] = {
-	/* button               mask            function        argument */
-	{ Button4,              ShiftMask,      kscrollup,      {.i =  mousescrollincrement} },
-	{ Button5,              ShiftMask,      kscrolldown,    {.i =  mousescrollincrement} },
+    /* button               mask            function        argument */
+    { Button4,              ShiftMask,      kscrollup,      {.i =  mousescrollincrement} },
+    { Button5,              ShiftMask,      kscrolldown,    {.i =  mousescrollincrement} },
 };
 
 /* Internal keyboard shortcuts. */
