@@ -60,6 +60,7 @@ static void zoom(const Arg *);
 static void zoomabs(const Arg *);
 static void zoomreset(const Arg *);
 static void ttysend(const Arg *);
+static void dupterm(const Arg *);
 
 /* config.h for applying patches and the configuration. */
 #include "config.h"
@@ -329,6 +330,18 @@ void
 ttysend(const Arg *arg)
 {
 	ttywrite(arg->s, strlen(arg->s), 1);
+}
+
+void
+dupterm(const Arg *arg)
+{
+    char cwd[PATH_MAX];
+    char cmd[PATH_MAX + 64];
+
+    if (getcwd(cwd, sizeof(cwd)) != NULL) {
+        sprintf(cmd, "setsid -f st -e fish -C \"cd %s\" 2> /dev/null", cwd);
+        system(cmd);
+    }
 }
 
 int
